@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fibra Animaciones</title>
+    <style>
+      @font-face {
+        font-family: "TWK Everett";
+        src: url("fonts/TWKEverett-Regular.otf") format("opentype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "TWK Everett Mono";
+        src: url("fonts/TWKEverettMono-Light.otf") format("opentype");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "TWK Everett Mono";
+        src: url("fonts/TWKEverettMono-Regular.otf") format("opentype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      :root {
+        --bg: #ff7da9;
+        --ink: #212121;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "TWK Everett", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 400;
+        color: var(--ink);
+        background: var(--bg);
+      }
+
+      .poster {
+        min-height: 100vh;
+        padding: clamp(24px, 4vw, 64px);
+        display: grid;
+        gap: clamp(24px, 4vw, 64px);
+        grid-template-rows: auto auto 1fr auto;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(240px, 1fr) minmax(280px, 1.2fr);
+        gap: clamp(24px, 4vw, 64px);
+        align-items: start;
+      }
+
+      .hero h1 {
+        font-size: clamp(32px, 8vw, 72px);
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        margin: 0;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+
+      .blob-wrap {
+        position: relative;
+        min-height: clamp(220px, 45vw, 520px);
+        display: grid;
+        place-items: center;
+      }
+
+      .blob {
+        width: min(70vw, 520px);
+        max-width: 100%;
+        transform-origin: 50% 45%;
+      }
+
+      .blob path {
+        transform-origin: 50% 45%;
+      }
+
+      .event {
+        display: grid;
+        grid-template-columns: minmax(240px, 1fr) minmax(200px, 1fr);
+        gap: clamp(24px, 4vw, 64px);
+        align-items: start;
+      }
+
+      .event-main {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .event-main span {
+        font-size: clamp(30px, 7vw, 68px);
+        line-height: 0.95;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+
+      .event-time {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .time-mark {
+        width: 26px;
+        height: 90px;
+      }
+
+      .lorem {
+        font-family: "TWK Everett Mono", "SFMono-Regular", "Courier New", monospace;
+        font-size: clamp(12px, 2.4vw, 18px);
+        line-height: 1.35;
+        font-weight: 300;
+        text-transform: none;
+        margin: 0;
+        max-width: 22ch;
+      }
+
+      .midline {
+        font-size: clamp(18px, 3.2vw, 26px);
+        line-height: 0.95;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .footer {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(16px, 3vw, 48px);
+        font-size: clamp(14px, 3vw, 22px);
+        line-height: 0.95;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .footer p {
+        margin: 0;
+      }
+
+      @media (max-width: 720px) {
+        .hero,
+        .event {
+          grid-template-columns: 1fr;
+        }
+
+        .blob {
+          width: min(82vw, 420px);
+        }
+
+        .lorem {
+          max-width: none;
+        }
+
+        .footer {
+          grid-template-columns: 1fr;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <main class="poster">
+      <section class="hero">
+        <h1>
+          Fibra<br />
+          Lado<br />
+          Be<br />
+          Doce<br />
+          Años<br />
+          De<br />
+          Proyectos<br />
+          Que<br />
+          No<br />
+          Fueron
+        </h1>
+        <div class="blob-wrap" aria-hidden="true">
+          <svg class="blob" viewBox="0 0 3383.63 4611.63" role="img">
+            <path
+              d="M2204.98 1039.92C2445.44 869.916 2798 980.07 2907.3 1324.31C3016.93 1668.1 3135.02 1988.29 2943.44 2098.12C2943.44 2098.12 2729.17 2220.42 2373.69 1929.8C2018.86 1638.92 1964.4 1209.22 2204.98 1039.92ZM998.488 4538.46C1543.34 4286.64 1241.67 3719.75 1418.11 3087.68C1594.62 2455.68 2123.49 2337.66 2395.79 2373.4C2668.08 2409.08 2752.89 2605.54 2520.76 2788.55C2288.62 2971.61 1861.2 3210.31 1672.6 3699.21C1496.49 4155.82 1766.32 4602.87 2203.81 4602.87C2607.65 4602.87 2939.86 4283.58 2860.05 3569.76C2775.77 2815.97 3293.53 2734.87 3373.85 2159.01C3454.17 1583.09 3011.09 1232.16 3094.92 749.951C3143.99 467.842 3282.41 452.892 3237.5 239.667C3189.67 12.4715 2928.16 0.646468 2928.16 0.646468C2509.65 -15.0825 2606.35 259.946 2726.12 418.125C2838.67 566.817 2868.7 712.971 2706.55 751.704C2527.52 794.467 2444.66 549.921 1949.39 208.346C1462.63 -127.379 891.65 -24.1786 668.155 353.529C491.393 652.208 523.688 1073.46 739.58 1270.76C1026.43 1532.98 1437.93 1464.68 1449.11 1188.62C1459.58 932.499 1221.33 989.428 1061.01 810.974C905.101 637.391 965.151 379.324 1141.46 319.278C1343.25 250.586 1526.84 348.845 1682.81 557.524C1828.77 752.807 1945.29 1490.48 1507.4 2043.07C983.934 2703.67 222.538 3068.45 34.9838 3711.24C-152.57 4354.09 449.342 4792.3 998.488 4538.46Z"
+              fill="#212121"
+            />
+          </svg>
+        </div>
+      </section>
+
+      <section class="event">
+        <div class="event-main">
+          <span>11</span>
+          <span>Noviembre</span>
+          <span>2025</span>
+          <span class="event-time">19:00 HRS</span>
+        </div>
+        <p class="lorem">
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+          euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
+          minim
+        </p>
+      </section>
+
+      <div class="midline">
+        Métele + Diseño<br />
+        Sound Machine<br />
+        2025©
+      </div>
+
+      <footer class="footer">
+        <p>
+          Fibra.pe<br />
+          @fibra_branding
+        </p>
+        <p>
+          Bookneue.<br />
+          Neue Web.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
