@@ -95,6 +95,8 @@
         pointer-events: none;
         z-index: 2;
         --dash: 0;
+        opacity: 0;
+        transition: opacity 200ms ease-out;
       }
 
       .outline path {
@@ -256,6 +258,7 @@
     </main>
     <script>
       const outline = document.querySelector(".outline");
+      let hasScrolled = false;
 
       function updateDash() {
         if (!outline) return;
@@ -263,6 +266,10 @@
           document.documentElement.scrollHeight - window.innerHeight;
         const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
         outline.style.setProperty("--dash", progress.toFixed(3));
+        if (!hasScrolled && window.scrollY > 0) {
+          hasScrolled = true;
+          outline.style.opacity = "1";
+        }
       }
 
       updateDash();
