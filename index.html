@@ -70,6 +70,23 @@
         text-transform: uppercase;
       }
 
+      .typeword {
+        display: inline-block;
+        clip-path: inset(0 100% 0 0);
+        animation: typing 520ms steps(12, end) forwards;
+        animation-delay: calc(var(--i) * 140ms);
+      }
+
+      .typeword + .typeword {
+        margin-left: 0.18em;
+      }
+
+      @keyframes typing {
+        to {
+          clip-path: inset(0 0 0 0);
+        }
+      }
+
       .blob-wrap {
         position: relative;
         min-height: clamp(220px, 45vw, 520px);
@@ -198,16 +215,16 @@
     <main class="poster">
       <section class="hero">
         <h1>
-          Fibra<br />
-          Lado<br />
-          Be<br />
-          Doce<br />
-          Años<br />
-          De<br />
-          Proyectos<br />
-          Que<br />
-          No<br />
-          Fueron
+          <span class="typeword" style="--i: 0">Fibra</span><br />
+          <span class="typeword" style="--i: 1">Lado</span><br />
+          <span class="typeword" style="--i: 2">Be</span><br />
+          <span class="typeword" style="--i: 3">Doce</span><br />
+          <span class="typeword" style="--i: 4">Años</span><br />
+          <span class="typeword" style="--i: 5">De</span><br />
+          <span class="typeword" style="--i: 6">Proyectos</span><br />
+          <span class="typeword" style="--i: 7">Que</span><br />
+          <span class="typeword" style="--i: 8">No</span><br />
+          <span class="typeword" style="--i: 9">Fueron</span>
         </h1>
         <div class="blob-wrap" aria-hidden="true">
           <svg class="blob" viewBox="0 0 3383.63 4611.63" role="img">
@@ -227,32 +244,59 @@
 
       <section class="event">
         <div class="event-main">
-          <span>11</span>
-          <span>Noviembre</span>
-          <span>2025</span>
-          <span class="event-time">19:00 HRS</span>
+          <span class="typeword" style="--i: 10">11</span>
+          <span class="typeword" style="--i: 11">Noviembre</span>
+          <span class="typeword" style="--i: 12">2025</span>
+          <span class="event-time typeword" style="--i: 13">19:00 HRS</span>
         </div>
         <p class="lorem">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-          euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
-          minim
+          <span class="typeword" style="--i: 14">Lorem</span>
+          <span class="typeword" style="--i: 15">ipsum</span>
+          <span class="typeword" style="--i: 16">dolor</span>
+          <span class="typeword" style="--i: 17">sit</span>
+          <span class="typeword" style="--i: 18">amet,</span>
+          <span class="typeword" style="--i: 19">consectetuer</span>
+          <span class="typeword" style="--i: 20">adipiscing</span>
+          <span class="typeword" style="--i: 21">elit,</span>
+          <span class="typeword" style="--i: 22">sed</span>
+          <span class="typeword" style="--i: 23">diam</span>
+          <span class="typeword" style="--i: 24">nonummy</span>
+          <span class="typeword" style="--i: 25">nibh</span>
+          <span class="typeword" style="--i: 26">euismod</span>
+          <span class="typeword" style="--i: 27">tincidunt</span>
+          <span class="typeword" style="--i: 28">ut</span>
+          <span class="typeword" style="--i: 29">laoreet</span>
+          <span class="typeword" style="--i: 30">dolore</span>
+          <span class="typeword" style="--i: 31">magna</span>
+          <span class="typeword" style="--i: 32">aliquam</span>
+          <span class="typeword" style="--i: 33">erat</span>
+          <span class="typeword" style="--i: 34">volutpat.</span>
+          <span class="typeword" style="--i: 35">Ut</span>
+          <span class="typeword" style="--i: 36">wisi</span>
+          <span class="typeword" style="--i: 37">enim</span>
+          <span class="typeword" style="--i: 38">ad</span>
+          <span class="typeword" style="--i: 39">minim</span>
         </p>
       </section>
 
       <div class="midline">
-        Métele + Diseño<br />
-        Sound Machine<br />
-        2025©
+        <span class="typeword" style="--i: 40">Métele</span>
+        <span class="typeword" style="--i: 41">+</span>
+        <span class="typeword" style="--i: 42">Diseño</span><br />
+        <span class="typeword" style="--i: 43">Sound</span>
+        <span class="typeword" style="--i: 44">Machine</span><br />
+        <span class="typeword" style="--i: 45">2025©</span>
       </div>
 
       <footer class="footer">
         <p>
-          Fibra.pe<br />
-          @fibra_branding
+          <span class="typeword" style="--i: 46">Fibra.pe</span><br />
+          <span class="typeword" style="--i: 47">@fibra_branding</span>
         </p>
         <p>
-          Bookneue.<br />
-          Neue Web.
+          <span class="typeword" style="--i: 48">Bookneue.</span><br />
+          <span class="typeword" style="--i: 49">Neue</span>
+          <span class="typeword" style="--i: 50">Web.</span>
         </p>
       </footer>
     </main>
