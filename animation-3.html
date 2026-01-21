@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Caminata Líquida (Turbulencia)</title>
+  <style>
+    body {
+      background-color: #EFA0B7; /* Rosa original */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* 1. MOVIMIENTO FÍSICO (Rebote y Rotación) */
+    svg {
+      width: 500px;
+      height: auto;
+      /* Aplicamos el filtro líquido que definimos abajo en el HTML */
+      filter: url(#filtroLiquido); 
+      
+      /* Animación de "caminar" (arriba/abajo + balanceo) */
+      animation: caminar 0.8s infinite alternate ease-in-out;
+    }
+
+    @keyframes caminar {
+      0% { transform: translateY(0) rotate(-2deg); }
+      100% { transform: translateY(-20px) rotate(2deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <svg viewBox="0 0 3384 4612">
+    
+    <defs>
+      <filter id="filtroLiquido">
+        <feTurbulence type="fractalNoise" baseFrequency="0.01 0.005" numOctaves="2" result="ruido">
+          <animate attributeName="baseFrequency" 
+                   values="0.01 0.005; 0.015 0.009; 0.01 0.005" 
+                   dur="2s" repeatCount="indefinite" />
+        </feTurbulence>
+        
+        <feDisplacementMap in="SourceGraphic" in2="ruido" scale="50" />
+      </filter>
+    </defs>
+
+    <path fill="#212121" d="M2204.98 1039.92C2445.44 869.916 2798 980.07 2907.3 1324.31C3016.93 1668.1 3135.02 1988.29 2943.44 2098.12C2943.44 2098.12 2729.17 2220.42 2373.69 1929.8C2018.86 1638.92 1964.4 1209.22 2204.98 1039.92ZM998.488 4538.46C1543.34 4286.64 1241.67 3719.75 1418.11 3087.68C1594.62 2455.68 2123.49 2337.66 2395.79 2373.4C2668.08 2409.08 2752.89 2605.54 2520.76 2788.55C2288.62 2971.61 1861.2 3210.31 1672.6 3699.21C1496.49 4155.82 1766.32 4602.87 2203.81 4602.87C2607.65 4602.87 2939.86 4283.58 2860.05 3569.76C2775.77 2815.97 3293.53 2734.87 3373.85 2159.01C3454.17 1583.09 3011.09 1232.16 3094.92 749.951C3143.99 467.842 3282.41 452.892 3237.5 239.667C3189.67 12.4715 2928.16 0.646468 2928.16 0.646468C2509.65 -15.0825 2606.35 259.946 2726.12 418.125C2838.67 566.817 2868.7 712.971 2706.55 751.704C2527.52 794.467 2444.66 549.921 1949.39 208.346C1462.63 -127.379 891.65 -24.1786 668.155 353.529C491.393 652.208 523.688 1073.46 739.58 1270.76C1026.43 1532.98 1437.93 1464.68 1449.11 1188.62C1459.58 932.499 1221.33 989.428 1061.01 810.974C905.101 637.391 965.151 379.324 1141.46 319.278C1343.25 250.586 1526.84 348.845 1682.81 557.524C1828.77 752.807 1945.29 1490.48 1507.4 2043.07C983.934 2703.67 222.538 3068.45 34.9838 3711.24C-152.57 4354.09 449.342 4792.3 998.488 4538.46Z"/>
+  </svg>
+
+</body>
+</html>

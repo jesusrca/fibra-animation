@@ -77,14 +77,28 @@
         place-items: center;
       }
 
-      .blob {
+      .blob,
+      .blob-canvas {
         width: min(70vw, 520px);
         max-width: 100%;
-        transform-origin: 50% 45%;
+        height: auto;
       }
 
-      .blob path {
-        transform-origin: 50% 45%;
+      .blob-canvas {
+        position: absolute;
+        inset: 0;
+        display: block;
+        aspect-ratio: 3383.63 / 4611.63;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+      }
+
+      .blob-fallback {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
       }
 
       .event {
@@ -155,7 +169,8 @@
           grid-template-columns: 1fr;
         }
 
-        .blob {
+        .blob,
+        .blob-canvas {
           width: min(82vw, 420px);
         }
 
@@ -169,6 +184,14 @@
       }
 
     </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/examples/": "https://unpkg.com/three@0.160.0/examples/"
+        }
+      }
+    </script>
   </head>
   <body>
     <main class="poster">
@@ -186,7 +209,8 @@
           Fueron
         </h1>
         <div class="blob-wrap" aria-hidden="true">
-          <svg class="blob" viewBox="0 0 3383.63 4611.63" role="img">
+          <canvas id="blob-canvas" class="blob-canvas"></canvas>
+          <svg class="blob blob-fallback" viewBox="0 0 3383.63 4611.63" role="img">
             <path
               d="M2204.98 1039.92C2445.44 869.916 2798 980.07 2907.3 1324.31C3016.93 1668.1 3135.02 1988.29 2943.44 2098.12C2943.44 2098.12 2729.17 2220.42 2373.69 1929.8C2018.86 1638.92 1964.4 1209.22 2204.98 1039.92ZM998.488 4538.46C1543.34 4286.64 1241.67 3719.75 1418.11 3087.68C1594.62 2455.68 2123.49 2337.66 2395.79 2373.4C2668.08 2409.08 2752.89 2605.54 2520.76 2788.55C2288.62 2971.61 1861.2 3210.31 1672.6 3699.21C1496.49 4155.82 1766.32 4602.87 2203.81 4602.87C2607.65 4602.87 2939.86 4283.58 2860.05 3569.76C2775.77 2815.97 3293.53 2734.87 3373.85 2159.01C3454.17 1583.09 3011.09 1232.16 3094.92 749.951C3143.99 467.842 3282.41 452.892 3237.5 239.667C3189.67 12.4715 2928.16 0.646468 2928.16 0.646468C2509.65 -15.0825 2606.35 259.946 2726.12 418.125C2838.67 566.817 2868.7 712.971 2706.55 751.704C2527.52 794.467 2444.66 549.921 1949.39 208.346C1462.63 -127.379 891.65 -24.1786 668.155 353.529C491.393 652.208 523.688 1073.46 739.58 1270.76C1026.43 1532.98 1437.93 1464.68 1449.11 1188.62C1459.58 932.499 1221.33 989.428 1061.01 810.974C905.101 637.391 965.151 379.324 1141.46 319.278C1343.25 250.586 1526.84 348.845 1682.81 557.524C1828.77 752.807 1945.29 1490.48 1507.4 2043.07C983.934 2703.67 222.538 3068.45 34.9838 3711.24C-152.57 4354.09 449.342 4792.3 998.488 4538.46Z"
               fill="#212121"
@@ -226,5 +250,136 @@
         </p>
       </footer>
     </main>
+    <script type="module">
+      import * as THREE from "three";
+      import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader.js";
+      import { gsap } from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/index.js";
+
+      const canvas = document.getElementById("blob-canvas");
+      const fallback = document.querySelector(".blob-fallback");
+
+      if (!canvas || !fallback) {
+        throw new Error("Missing blob canvas or fallback.");
+      }
+
+      try {
+        const renderer = new THREE.WebGLRenderer({
+          canvas,
+          alpha: true,
+          antialias: true,
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
+        camera.position.z = 2;
+
+        const loader = new SVGLoader();
+        const svgText =
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3383.63 4611.63"><path d="M2204.98 1039.92C2445.44 869.916 2798 980.07 2907.3 1324.31C3016.93 1668.1 3135.02 1988.29 2943.44 2098.12C2943.44 2098.12 2729.17 2220.42 2373.69 1929.8C2018.86 1638.92 1964.4 1209.22 2204.98 1039.92ZM998.488 4538.46C1543.34 4286.64 1241.67 3719.75 1418.11 3087.68C1594.62 2455.68 2123.49 2337.66 2395.79 2373.4C2668.08 2409.08 2752.89 2605.54 2520.76 2788.55C2288.62 2971.61 1861.2 3210.31 1672.6 3699.21C1496.49 4155.82 1766.32 4602.87 2203.81 4602.87C2607.65 4602.87 2939.86 4283.58 2860.05 3569.76C2775.77 2815.97 3293.53 2734.87 3373.85 2159.01C3454.17 1583.09 3011.09 1232.16 3094.92 749.951C3143.99 467.842 3282.41 452.892 3237.5 239.667C3189.67 12.4715 2928.16 0.646468 2928.16 0.646468C2509.65 -15.0825 2606.35 259.946 2726.12 418.125C2838.67 566.817 2868.7 712.971 2706.55 751.704C2527.52 794.467 2444.66 549.921 1949.39 208.346C1462.63 -127.379 891.65 -24.1786 668.155 353.529C491.393 652.208 523.688 1073.46 739.58 1270.76C1026.43 1532.98 1437.93 1464.68 1449.11 1188.62C1459.58 932.499 1221.33 989.428 1061.01 810.974C905.101 637.391 965.151 379.324 1141.46 319.278C1343.25 250.586 1526.84 348.845 1682.81 557.524C1828.77 752.807 1945.29 1490.48 1507.4 2043.07C983.934 2703.67 222.538 3068.45 34.9838 3711.24C-152.57 4354.09 449.342 4792.3 998.488 4538.46Z" fill="#212121"/></svg>';
+
+        const svgData = loader.parse(svgText);
+        const shapes = [];
+        svgData.paths.forEach((path) => {
+          shapes.push(...SVGLoader.createShapes(path));
+        });
+
+        const group = new THREE.Group();
+        const geometries = [];
+        shapes.forEach((shape) => {
+          const geometry = new THREE.ShapeGeometry(shape, 64);
+          const material = new THREE.MeshBasicMaterial({
+            color: 0x212121,
+            side: THREE.DoubleSide,
+          });
+          const mesh = new THREE.Mesh(geometry, material);
+          group.add(mesh);
+          geometries.push(geometry);
+        });
+        scene.add(group);
+
+        const box = new THREE.Box3().setFromObject(group);
+        const size = new THREE.Vector3();
+        box.getSize(size);
+        const center = new THREE.Vector3();
+        box.getCenter(center);
+        group.position.set(-center.x, -center.y, 0);
+
+        const motion = { breathe: 0, sway: 0 };
+        gsap.to(motion, {
+          breathe: 1,
+          duration: 2.6,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+        gsap.to(motion, {
+          sway: 1,
+          duration: 3.4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 0.3,
+        });
+
+        const basePositions = geometries.map((geometry) =>
+          geometry.attributes.position.array.slice(0)
+        );
+
+        function resize() {
+          const wrapper = canvas.parentElement;
+          if (!wrapper) return;
+          const width = wrapper.clientWidth;
+          const height = wrapper.clientHeight;
+          renderer.setSize(width, height, false);
+          const scale = Math.min(width / size.x, height / size.y);
+          group.scale.set(scale, scale, 1);
+          camera.left = -width / 2;
+          camera.right = width / 2;
+          camera.top = height / 2;
+          camera.bottom = -height / 2;
+          camera.updateProjectionMatrix();
+        }
+
+        let hasRendered = false;
+        function animate(time) {
+          const t = time * 0.001;
+          geometries.forEach((geometry, geoIndex) => {
+            const position = geometry.attributes.position;
+            const base = basePositions[geoIndex];
+            for (let i = 0; i < position.count; i += 1) {
+              const ix = i * 3;
+              const ox = base[ix];
+              const oy = base[ix + 1];
+              const wave =
+                Math.sin(t * 1.6 + ox * 0.004 + oy * 0.003) *
+                (2 + 5 * motion.breathe);
+              const sway =
+                Math.cos(t * 1.1 + ox * 0.002 - oy * 0.004) *
+                (1 + 4 * motion.sway);
+              const offsetX = wave * 0.7 + sway * 0.3;
+              const offsetY = wave * 0.4 - sway * 0.6;
+              position.setXYZ(i, ox + offsetX, oy + offsetY, 0);
+            }
+            position.needsUpdate = true;
+          });
+          renderer.render(scene, camera);
+          if (!hasRendered) {
+            hasRendered = true;
+            canvas.style.opacity = "1";
+            fallback.style.opacity = "0";
+            fallback.style.pointerEvents = "none";
+          }
+          requestAnimationFrame(animate);
+        }
+
+        resize();
+        window.addEventListener("resize", resize);
+        requestAnimationFrame(animate);
+      } catch (error) {
+        canvas.style.opacity = "0";
+        fallback.style.opacity = "1";
+      }
+    </script>
   </body>
 </html>

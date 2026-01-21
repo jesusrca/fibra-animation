@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fibra - Mobile</title>
+    <style>
+      @font-face {
+        font-family: "TWK Everett";
+        src: url("fonts/TWKEverett-Regular.otf") format("opentype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "TWK Everett Mono";
+        src: url("fonts/TWKEverettMono-Light.otf") format("opentype");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      :root {
+        --mint: #DFE8E4;
+        --green: #008147;
+        --pink: #FF7DA9;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--mint);
+        color: var(--green);
+        font-family: "TWK Everett", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      .scene {
+        min-height: 200vh;
+      }
+
+      .sticky {
+        position: sticky;
+        top: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 28px 20px 36px;
+      }
+
+      .poster {
+        width: min(520px, 100%);
+        display: grid;
+        gap: 18px;
+        text-align: center;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: reveal 700ms ease-out forwards;
+      }
+
+      .reveal.delay-1 {
+        animation-delay: 120ms;
+      }
+
+      .reveal.delay-2 {
+        animation-delay: 220ms;
+      }
+
+      .reveal.delay-3 {
+        animation-delay: 320ms;
+      }
+
+      .reveal.delay-4 {
+        animation-delay: 420ms;
+      }
+
+      .reveal.delay-5 {
+        animation-delay: 520ms;
+      }
+
+      .reveal.delay-6 {
+        animation-delay: 620ms;
+      }
+
+      @keyframes reveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .title {
+        font-size: clamp(28px, 7vw, 44px);
+        letter-spacing: 0.02em;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .subtitle {
+        font-family: "TWK Everett Mono", "SFMono-Regular", "Courier New", monospace;
+        font-size: clamp(14px, 3.6vw, 20px);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        margin: -4px 0 6px;
+      }
+
+      .card {
+        position: relative;
+        border-radius: 4px;
+        overflow: hidden;
+        height: clamp(360px, 78vw, 560px);
+        --wipe: 50%;
+      }
+
+      .card-layer {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+      }
+
+      .card-layer.base {
+        background: var(--green);
+      }
+
+      .card-layer.reveal {
+        background: var(--pink);
+        clip-path: url(#wave-clip);
+      }
+
+      .blob {
+        position: absolute;
+        width: min(62%, 280px);
+        inset: 10% auto auto 50%;
+        transform: translateX(-50%) skewY(var(--bend, 0deg)) scaleX(var(--stretch, 1));
+        transform-origin: center;
+        transition: transform 120ms linear;
+      }
+
+      .tagline {
+        font-size: clamp(22px, 6vw, 30px);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin: 6px 0 0;
+        line-height: 1.1;
+      }
+
+      .tagline span {
+        display: block;
+      }
+
+      .pills {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .pill {
+        border: 2px solid var(--green);
+        border-radius: 999px;
+        padding: 8px 18px;
+        font-family: "TWK Everett Mono", "SFMono-Regular", "Courier New", monospace;
+        font-size: clamp(12px, 3.4vw, 16px);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        background: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="scene">
+      <section class="sticky">
+        <div class="poster">
+          <h1 class="title reveal">WWW.FIBRA.PE</h1>
+          <p class="subtitle reveal delay-1">NEW VIBES. NEW WEB LAUNCH.</p>
+
+          <div class="card" aria-hidden="true" style="--wipe: 50%">
+            <svg class="clip-svg" width="0" height="0" aria-hidden="true">
+              <defs>
+                <clipPath id="wave-clip" clipPathUnits="objectBoundingBox">
+                  <path id="wave-path" d="M 0 0 L 1 0 L 1 0.5 L 0 0.5 Z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+            <div class="card-layer base">
+              <img
+                class="blob"
+                src="0fa19d5ec911d4870d046f83f0d95c2c14a223b9.svg"
+                alt=""
+              />
+            </div>
+            <div class="card-layer reveal">
+              <img
+                class="blob"
+                src="0fa19d5ec911d4870d046f83f0d95c2c14a223b9-green.svg"
+                alt=""
+              />
+            </div>
+          </div>
+
+          <p class="tagline">
+            <span class="reveal delay-2">FEEL. DESIGN. TRANSFORM.</span>
+            <span class="reveal delay-3">OUR JOURNEY TOGETHER</span>
+          </p>
+
+          <div class="pills">
+            <span class="pill reveal delay-4">Streaming</span>
+            <span class="pill reveal delay-5">Stay Tuned</span>
+            <span class="pill reveal delay-6">11.11.2025</span>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      const scene = document.querySelector(".scene");
+      const card = document.querySelector(".card");
+      const wavePath = document.getElementById("wave-path");
+
+      let allowFullRange = false;
+      let targetWipe = 0.5;
+      let currentWipe = 0.5;
+      let phase = 0;
+
+      function updateWipe() {
+        if (!scene || !card) return;
+        if (!allowFullRange) return;
+        const rect = scene.getBoundingClientRect();
+        const scrollRange = scene.offsetHeight - window.innerHeight;
+        const scrolled = Math.min(Math.max(-rect.top, 0), scrollRange);
+        const progress = scrollRange > 0 ? scrolled / scrollRange : 0;
+        targetWipe = progress;
+        const bend = (progress - 0.5) * 10;
+        const stretch = 1 + Math.abs(progress - 0.5) * 0.08;
+        card.style.setProperty("--bend", `${bend.toFixed(2)}deg`);
+        card.style.setProperty("--stretch", stretch.toFixed(3));
+      }
+
+      function updateWave() {
+        if (!wavePath) return;
+        currentWipe += (targetWipe - currentWipe) * 0.12;
+        phase += 0.04;
+        const amplitude = 0.02;
+        const frequency = 2.4;
+        const segments = 28;
+        let d = "M 0 0 L 1 0";
+        const points = [];
+        for (let i = 0; i <= segments; i += 1) {
+          const x = i / segments;
+          const y =
+            currentWipe +
+            amplitude * Math.sin(x * Math.PI * 2 * frequency + phase);
+          const clampedY = Math.min(Math.max(y, 0), 1);
+          points.push([x, clampedY]);
+        }
+        const last = points[points.length - 1];
+        d += ` L 1 ${last[1].toFixed(4)}`;
+        for (let i = points.length - 2; i >= 0; i -= 1) {
+          const [x, y] = points[i];
+          d += ` L ${x.toFixed(4)} ${y.toFixed(4)}`;
+        }
+        d += " Z";
+        wavePath.setAttribute("d", d);
+        requestAnimationFrame(updateWave);
+      }
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!allowFullRange) {
+            allowFullRange = true;
+          }
+          updateWipe();
+        },
+        { passive: true }
+      );
+      window.addEventListener("resize", updateWipe);
+      requestAnimationFrame(updateWave);
+    </script>
+  </body>
+</html>
