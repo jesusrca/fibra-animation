@@ -59,40 +59,32 @@
         text-align: center;
       }
 
-      .reveal {
+      .stamp-word {
+        display: inline-block;
         opacity: 0;
-        transform: translateY(10px);
-        animation: reveal 700ms ease-out forwards;
+        transform: translateY(6px) scale(0.92) rotate(-1.5deg);
+        animation: stamp 520ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        animation-delay: calc(var(--i) * 140ms);
       }
 
-      .reveal.delay-1 {
-        animation-delay: 120ms;
+      .stamp-line {
+        display: inline-block;
       }
 
-      .reveal.delay-2 {
-        animation-delay: 220ms;
+      .stamp-word + .stamp-word {
+        margin-left: 0.28em;
       }
 
-      .reveal.delay-3 {
-        animation-delay: 320ms;
+      .pill.stamp {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.28em;
       }
 
-      .reveal.delay-4 {
-        animation-delay: 420ms;
-      }
-
-      .reveal.delay-5 {
-        animation-delay: 520ms;
-      }
-
-      .reveal.delay-6 {
-        animation-delay: 620ms;
-      }
-
-      @keyframes reveal {
+      @keyframes stamp {
         to {
           opacity: 1;
-          transform: translateY(0);
+          transform: translateY(0) scale(1) rotate(0deg);
         }
       }
 
@@ -152,8 +144,12 @@
         line-height: 1.1;
       }
 
-      .tagline span {
+      .tagline .stamp-line {
         display: block;
+      }
+
+      .tagline .stamp-word {
+        display: inline-block;
       }
 
       .pills {
@@ -179,8 +175,16 @@
     <main class="scene">
       <section class="sticky">
         <div class="poster">
-          <h1 class="title reveal">WWW.FIBRA.PE</h1>
-          <p class="subtitle reveal delay-1">NEW VIBES. NEW WEB LAUNCH.</p>
+          <h1 class="title">
+            <span class="stamp-word" style="--i: 0">WWW.FIBRA.PE</span>
+          </h1>
+          <p class="subtitle">
+            <span class="stamp-word" style="--i: 1">NEW</span>
+            <span class="stamp-word" style="--i: 2">VIBES.</span>
+            <span class="stamp-word" style="--i: 3">NEW</span>
+            <span class="stamp-word" style="--i: 4">WEB</span>
+            <span class="stamp-word" style="--i: 5">LAUNCH.</span>
+          </p>
 
           <div class="card" aria-hidden="true" style="--wipe: 50%">
             <svg class="clip-svg" width="0" height="0" aria-hidden="true">
@@ -207,14 +211,29 @@
           </div>
 
           <p class="tagline">
-            <span class="reveal delay-2">FEEL. DESIGN. TRANSFORM.</span>
-            <span class="reveal delay-3">OUR JOURNEY TOGETHER</span>
+            <span class="stamp-line">
+              <span class="stamp-word" style="--i: 6">FEEL.</span>
+              <span class="stamp-word" style="--i: 7">DESIGN.</span>
+              <span class="stamp-word" style="--i: 8">TRANSFORM.</span>
+            </span>
+            <span class="stamp-line">
+              <span class="stamp-word" style="--i: 9">OUR</span>
+              <span class="stamp-word" style="--i: 10">JOURNEY</span>
+              <span class="stamp-word" style="--i: 11">TOGETHER</span>
+            </span>
           </p>
 
           <div class="pills">
-            <span class="pill reveal delay-4">Streaming</span>
-            <span class="pill reveal delay-5">Stay Tuned</span>
-            <span class="pill reveal delay-6">11.11.2025</span>
+            <span class="pill stamp">
+              <span class="stamp-word" style="--i: 12">Streaming</span>
+            </span>
+            <span class="pill stamp">
+              <span class="stamp-word" style="--i: 13">Stay</span>
+              <span class="stamp-word" style="--i: 14">Tuned</span>
+            </span>
+            <span class="pill stamp">
+              <span class="stamp-word" style="--i: 15">11.11.2025</span>
+            </span>
           </div>
         </div>
       </section>
